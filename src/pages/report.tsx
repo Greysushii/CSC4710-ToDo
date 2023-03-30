@@ -54,7 +54,7 @@ const Report: NextPage = () => {
             readOnly={true}
             separator="to"
             primaryColor="purple"
-            inputClassName="font-normal text-xl outline-none bg-white dark:bg-white"
+            inputClassName="font-normal text-xl outline-none bg-white dark:bg-white dark:text-black"
             value={dateValue}
             onChange={(value) => setDateValue(value)}
             displayFormat="MM/DD/YYYY"
