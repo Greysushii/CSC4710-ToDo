@@ -34,13 +34,13 @@ export const todoRouter = createTRPCRouter({
       switch (input.dateFilter) {
         case "today":
           tasks = await ctx.prisma
-            .$queryRaw`SELECT * FROM Task WHERE due_date == ${CURRENT_DATE.endOf(
+            .$queryRaw`SELECT * FROM Task WHERE due_date = ${CURRENT_DATE.endOf(
             "day"
           ).toDate()} ORDER BY priority ASC`;
           break;
         case "tomorrow":
           tasks = await ctx.prisma
-            .$queryRaw`SELECT * FROM Task WHERE due_date == ${CURRENT_DATE.add(
+            .$queryRaw`SELECT * FROM Task WHERE due_date = ${CURRENT_DATE.add(
             1,
             "day"
           ).endOf("day").toDate()} ORDER BY priority ASC`;

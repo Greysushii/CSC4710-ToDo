@@ -92,7 +92,7 @@ const TaskFormDialog: React.FC<TaskFormDialogProps> = ({
             exit={{ opacity: 0, transition: { duration: 0.3 } }}
           >
             <div
-              className="relative flex h-fit w-2/5 items-center justify-center rounded-md border
+              className="relative flex h-fit w-2/4 items-center justify-center rounded-md border
               border-gray-700 bg-gradient-to-b from-purple-700 via-violet-800 to-purple-900 p-6"
             >
               <TiDelete
