@@ -234,7 +234,7 @@ const TaskFormDialog: React.FC<TaskFormDialogProps> = ({
                     </label>
                     <Datepicker
                       primaryColor="violet"
-                      inputClassName="font-normal outline-none text-black text-xl p-2.5 bg-white dark:bg-white dark:text-black"
+                      inputClassName="font-normal outline-none text-black text-xl p-2.5"
                       readOnly={true}
                       asSingle={true}
                       useRange={false}
