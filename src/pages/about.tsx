@@ -234,13 +234,13 @@ const About: NextPage = () => {
                 <li className="list-item">
                   <span className="italic text-amber-500">(Due today)</span>{" "}
                   SELECT * FROM Task WHERE due_date =
-                  $&#123;CURRENT_DATE.endOf(&quot;day&quot;)&#125; ORDER BY
+                  $&#123;CURRENT_DATE.endOf(&quot;day&quot;).toDate()&#125; ORDER BY
                   priority ASC;
                 </li>
                 <li className="list-item">
                   <span className="italic text-amber-500">(Due tomorrow)</span>{" "}
                   SELECT * FROM Task WHERE due_date = $&#123;CURRENT_DATE.add(1,
-                  &quot;day&quot;).endOf(&quot;day&quot;)&#125; ORDER BY
+                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; ORDER BY
                   priority ASC;
                 </li>
                 <li className="list-item">
@@ -249,8 +249,8 @@ const About: NextPage = () => {
                   </span>{" "}
                   SELECT * FROM Task WHERE due_date &lt;=
                   $&#123;CURRENT_DATE.add(7, &quot;day&quot;).endOf(
-                  &quot;day&quot;)&#125; <br /> AND due_date &gt;=
-                  $&#123;CURRENT_DATE.startOf( &quot;day&quot; )&#125; ORDER BY
+                  &quot;day&quot;).toDate()&#125; <br /> AND due_date &gt;=
+                  $&#123;CURRENT_DATE.startOf(&quot;day&quot;).toDate()&#125; ORDER BY
                   priority ASC, due_date DESC;
                 </li>
               </ul>
@@ -269,7 +269,7 @@ const About: NextPage = () => {
                   <span className="italic text-amber-500">(Due today)</span>{" "}
                   SELECT * FROM Task WHERE category_name =
                   $&#123;input.category_name&#125; AND <br />
-                  due_date = $&#123;CURRENT_DATE.endOf(&quot;day&quot;)&#125;
+                  due_date = $&#123;CURRENT_DATE.endOf(&quot;day&quot;).toDate()&#125;
                   ORDER BY priority ASC;
                 </li>
                 <li className="list-item">
@@ -277,7 +277,7 @@ const About: NextPage = () => {
                   SELECT * FROM Task WHERE category_name =
                   $&#123;input.category_name&#125; AND <br /> due_date =
                   $&#123;CURRENT_DATE.add(1,
-                  &quot;day&quot;).endOf(&quot;day&quot;)&#125; ORDER BY
+                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; ORDER BY
                   priority ASC;
                 </li>
                 <li className="list-item">
@@ -287,8 +287,8 @@ const About: NextPage = () => {
                   SELECT * FROM Task WHERE category_name =
                   $&#123;input.category_name&#125; AND <br />
                   due_date &lt;= $&#123;CURRENT_DATE.add(7,
-                  &quot;day&quot;).endOf(&quot;day&quot;)&#125; AND due_date
-                  &gt;= $&#123;CURRENT_DATE.startOf(&quot;day&quot;)&#125; ORDER
+                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; AND due_date
+                  &gt;= $&#123;CURRENT_DATE.startOf(&quot;day&quot;).toDate()&#125; ORDER
                   BY priority ASC, due_date DESC;
                 </li>
               </ul>
