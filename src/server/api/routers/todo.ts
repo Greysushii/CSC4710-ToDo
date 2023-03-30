@@ -36,23 +36,23 @@ export const todoRouter = createTRPCRouter({
           tasks = await ctx.prisma
             .$queryRaw`SELECT * FROM Task WHERE due_date == ${CURRENT_DATE.endOf(
             "day"
-          )} ORDER BY priority ASC`;
+          ).toDate()} ORDER BY priority ASC`;
           break;
         case "tomorrow":
           tasks = await ctx.prisma
             .$queryRaw`SELECT * FROM Task WHERE due_date == ${CURRENT_DATE.add(
             1,
             "day"
-          ).endOf("day")} ORDER BY priority ASC`;
+          ).endOf("day").toDate()} ORDER BY priority ASC`;
           break;
         case "next-week":
           tasks = await ctx.prisma
             .$queryRaw`SELECT * FROM Task WHERE due_date <= ${CURRENT_DATE.add(
             7,
             "day"
-          ).endOf("day")} AND due_date >= ${CURRENT_DATE.startOf(
+          ).endOf("day").toDate()} AND due_date >= ${CURRENT_DATE.startOf(
             "day"
-          )}ORDER BY priority ASC, due_date DESC`;
+          ).toDate()}ORDER BY priority ASC, due_date DESC`;
           break;
         default:
           tasks = await ctx.prisma
@@ -84,15 +84,15 @@ export const todoRouter = createTRPCRouter({
           tasks = await ctx.prisma
             .$queryRaw`SELECT * FROM Task WHERE category_name = ${
             input.category_name
-          } AND due_date == ${CURRENT_DATE.endOf("day")} ORDER BY priority ASC`;
+          } AND due_date = ${CURRENT_DATE.endOf("day").toDate()} ORDER BY priority ASC`;
           break;
         case "tomorrow":
           tasks = await ctx.prisma
             .$queryRaw`SELECT * FROM Task WHERE category_name = ${
             input.category_name
-          } AND due_date == ${CURRENT_DATE.add(1, "day").endOf(
+          } AND due_date = ${CURRENT_DATE.add(1, "day").endOf(
             "day"
-          )} ORDER BY priority ASC`;
+          ).toDate()} ORDER BY priority ASC`;
           break;
         case "next-week":
           tasks = await ctx.prisma
@@ -100,7 +100,7 @@ export const todoRouter = createTRPCRouter({
             input.category_name
           } AND due_date <= ${CURRENT_DATE.add(7, "day").endOf(
             "day"
-          )} ORDER BY priority ASC, due_date DESC`;
+          ).toDate()} ORDER BY priority ASC, due_date DESC`;
           break;
         default:
           tasks = await ctx.prisma
@@ -123,7 +123,7 @@ export const todoRouter = createTRPCRouter({
       // * SQL statement is in the back-ticks.
 
       // Convert date to be the end of the day using dayjs library.
-      const FORMATTED_DATE = dayjs(input.due_date).endOf("day");
+      const FORMATTED_DATE = dayjs(input.due_date).endOf("day").toDate();
       let task: Task;
 
       // If a category is provided, insert it into the database.
@@ -201,8 +201,8 @@ export const todoRouter = createTRPCRouter({
   generateReport: publicProcedure
     .input(z.object({ startDate: z.date(), endDate: z.date() }))
     .query(async ({ ctx, input }) => {
-      const FORMATTED_START_DATE = dayjs(input.startDate).startOf("day");
-      const FORMATTED_END_DATE = dayjs(input.endDate).endOf("day");
+      const FORMATTED_START_DATE = dayjs(input.startDate).startOf("day").toDate();
+      const FORMATTED_END_DATE = dayjs(input.endDate).endOf("day").toDate();
       const tasks: Task[] = await ctx.prisma
         .$queryRaw`SELECT * FROM Task WHERE due_date >= ${FORMATTED_START_DATE} AND due_date <= ${FORMATTED_END_DATE}`;
 
