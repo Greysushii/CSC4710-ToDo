@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
           CSC 4710 <span className="text-[hsl(280,100%,70%)]">ToDo</span> App
         </Link>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="mt-4 flex flex-col p-4  md:mt-0 md:flex-row md:space-x-8 md:border-0 md:text-xl md:font-medium md:dark:bg-gray-900">
+          <ul className="mt-4 flex flex-col p-4  md:mt-0 md:flex-row md:space-x-8 md:border-0 md:text-xl md:font-medium">
             <li>
               <Link
                 href="/"
