@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+// Category table
+model Category {
+    name  String @id
+    tasks Task[] // Indicate the many to one relation
+}
+
+// Task table
+model Task {
+    id            Int       @id @default(autoincrement())
+    priority      Int
+    name          String
+    description   String
+    status        String    @default("active") // ! I don't think this needs to be a separate field.
+    due_date      DateTime  @default(now())
+    category_name String? // User's don't need to have a category for a task
+    category      Category? @relation(fields: [category_name], references: [name]) // Indicate the many to one relation
+
+    @@index([category_name])
+}
