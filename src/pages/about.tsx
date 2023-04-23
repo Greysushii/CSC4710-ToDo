@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import Head from "next/head";
 import Navbar from "~/components/navigation/Navbar";
+import Image from "next/image";
 
 const About: NextPage = () => {
   useEffect(() => toast.dismiss(), []); // Dismiss toasts from other pages.
@@ -234,14 +235,14 @@ const About: NextPage = () => {
                 <li className="list-item">
                   <span className="italic text-amber-500">(Due today)</span>{" "}
                   SELECT * FROM Task WHERE due_date =
-                  $&#123;CURRENT_DATE.endOf(&quot;day&quot;).toDate()&#125; ORDER BY
-                  priority ASC;
+                  $&#123;CURRENT_DATE.endOf(&quot;day&quot;).toDate()&#125;
+                  ORDER BY priority ASC;
                 </li>
                 <li className="list-item">
                   <span className="italic text-amber-500">(Due tomorrow)</span>{" "}
                   SELECT * FROM Task WHERE due_date = $&#123;CURRENT_DATE.add(1,
-                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; ORDER BY
-                  priority ASC;
+                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; ORDER
+                  BY priority ASC;
                 </li>
                 <li className="list-item">
                   <span className="italic text-amber-500">
@@ -250,8 +251,8 @@ const About: NextPage = () => {
                   SELECT * FROM Task WHERE due_date &lt;=
                   $&#123;CURRENT_DATE.add(7, &quot;day&quot;).endOf(
                   &quot;day&quot;).toDate()&#125; <br /> AND due_date &gt;=
-                  $&#123;CURRENT_DATE.startOf(&quot;day&quot;).toDate()&#125; ORDER BY
-                  priority ASC, due_date DESC;
+                  $&#123;CURRENT_DATE.startOf(&quot;day&quot;).toDate()&#125;
+                  ORDER BY priority ASC, due_date DESC;
                 </li>
               </ul>
             </motion.div>
@@ -269,7 +270,8 @@ const About: NextPage = () => {
                   <span className="italic text-amber-500">(Due today)</span>{" "}
                   SELECT * FROM Task WHERE category_name =
                   $&#123;input.category_name&#125; AND <br />
-                  due_date = $&#123;CURRENT_DATE.endOf(&quot;day&quot;).toDate()&#125;
+                  due_date =
+                  $&#123;CURRENT_DATE.endOf(&quot;day&quot;).toDate()&#125;
                   ORDER BY priority ASC;
                 </li>
                 <li className="list-item">
@@ -277,8 +279,8 @@ const About: NextPage = () => {
                   SELECT * FROM Task WHERE category_name =
                   $&#123;input.category_name&#125; AND <br /> due_date =
                   $&#123;CURRENT_DATE.add(1,
-                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; ORDER BY
-                  priority ASC;
+                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; ORDER
+                  BY priority ASC;
                 </li>
                 <li className="list-item">
                   <span className="italic text-amber-500">
@@ -287,9 +289,10 @@ const About: NextPage = () => {
                   SELECT * FROM Task WHERE category_name =
                   $&#123;input.category_name&#125; AND <br />
                   due_date &lt;= $&#123;CURRENT_DATE.add(7,
-                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; AND due_date
-                  &gt;= $&#123;CURRENT_DATE.startOf(&quot;day&quot;).toDate()&#125; ORDER
-                  BY priority ASC, due_date DESC;
+                  &quot;day&quot;).endOf(&quot;day&quot;).toDate()&#125; AND
+                  due_date &gt;=
+                  $&#123;CURRENT_DATE.startOf(&quot;day&quot;).toDate()&#125;
+                  ORDER BY priority ASC, due_date DESC;
                 </li>
               </ul>
             </motion.div>
@@ -385,6 +388,14 @@ const About: NextPage = () => {
                   $&#123;FORMATTED_END_DATE&#125;;
                 </li>
               </ul>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="flex flex-col gap-4"
+            >
+              <Image src="/ERDiagram.jpg" height={350} width={350} alt="Cade" />
             </motion.div>
           </motion.div>
         </div>
