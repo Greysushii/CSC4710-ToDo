@@ -38,7 +38,7 @@ const About: NextPage = () => {
             transition={{ duration: 0.4, delay: 0.4 }}
             className="flex min-h-screen snap-y flex-col items-center"
           >
-            <h2 className="mb-8 text-6xl font-bold">Cade</h2>
+            <h2 className="mb-8 text-6xl font-bold">Cayden Koweck</h2>
             <Image
               className="rounded-full"
               src="/Cade_Koweck.jpg"
